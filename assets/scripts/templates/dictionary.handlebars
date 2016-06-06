@@ -1,0 +1,15 @@
+{{#each words}}
+  <div class="row">
+    <div class="panel panel-inverse " >
+      <div class="panel-body word-div">
+
+        <div class="col-md-6">
+          <p class="search-word-definition word-div" data-attribute={{@key}}>{{this.entry}} - {{this.defintion}}</p>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}

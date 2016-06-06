@@ -2,9 +2,13 @@
 
 const app = require('../app-data');
 const ui = require('./ui');
+const authUi = require('../auth/ui');
+const authApi = require('../auth/api');
+
+
 
 const searchWord = (success, failure, word) => {
-  console.log('search word' + word)
+  console.log('search word ' + word)
   $.ajax({
     method: "GET",
     url: app.urbanDictionary + word,
@@ -15,6 +19,7 @@ const searchWord = (success, failure, word) => {
 }).done(success)
   .fail(failure);
 };
+
 
 
 module.exports = {

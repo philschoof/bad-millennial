@@ -1,12 +1,38 @@
 'use strict';
 
 
+const app = require('../app-data');
+
 //currentUser object set on successful sign-in
 let currentUser = {
   token:'',
-  id: undefined,
-  username: undefined
+  id: undefined
 };
+
+const displayDictionary = (words) => {
+  let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
+  $('.dictionary-display').html(dictionaryDisplayTemplate({
+    words:words.words
+  }));
+}
+
+const getWords = () => {
+  $.ajax({
+    method: "GET",
+    url:app.api + 'users/' + currentUser.id + '/words',
+    dataType: 'json',
+    headers: {
+      Authorization: "Token token=" + currentUser.token
+    }
+  }).done(function(words){
+    console.log('get words success');
+    console.log(words);
+    displayDictionary(words);
+
+  });
+};
+
+
 
 const signUpSuccess = () => {
   console.log('signed-up');
@@ -15,8 +41,9 @@ const signUpSuccess = () => {
 const signInSuccess = (data) => {
   currentUser.token = data.user.token;
   currentUser.id = data.user.id;
-  currentUser.username = data.user.username;
-  console.log('signed-in');
+  console.log(currentUser);
+  getWords();
+
 };
 
 const changePasswordSuccess = () => {

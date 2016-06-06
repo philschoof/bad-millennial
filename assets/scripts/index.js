@@ -36,8 +36,26 @@ $('#sign-out').on('click', function(event){
   authApi.signOut(authUi.signOutSuccess, authUi.failure);
 });
 
-$('#search-word').on('submit', function(event){
+let word = '';
+
+$('#search-word').on('submit', function(event, word){
   event.preventDefault();
-  let word = $('#wordInput').val()
+  word = $('#wordInput').val();
+  $('.search-word-display').html(word);
+  console.log(word);
   wordApi.searchWord(wordUi.searchSuccess, wordUi.failure, word);
 })
+
+//click handler to add word and definition
+$('.word-div').on('click', function(event){
+  console.log('word clicked')
+  let definition = $(this).text();
+  definition.trim();
+  let word = $('.search-word-display').text();
+  event.preventDefault();
+  wordUi.addWord(addWordSuccess, failure, definition, word)
+});
+
+module.exports = {
+  word
+}

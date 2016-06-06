@@ -4,6 +4,7 @@ const app = require('../app-data');
 const ui = require('./ui');
 
 
+
 //User CRUD
 const signUp = (success, failure, data) => {
   console.log("API", data);
