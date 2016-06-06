@@ -5,7 +5,9 @@
 
 // use require without a reference to ensure a file is bundled
 const authApi = require('./auth/api');
+const wordApi = require('./word/api');
 const authUi = require('./auth/ui');
+const wordUi = require('./word/ui');
 const getFormFields = require('../../lib/get-form-fields');
 
 $('#sign-up').on('submit', function (event){
@@ -33,3 +35,9 @@ $('#sign-out').on('click', function(event){
   event.preventDefault();
   authApi.signOut(authUi.signOutSuccess, authUi.failure);
 });
+
+$('#search-word').on('submit', function(event){
+  event.preventDefault();
+  let word = $('#wordInput').val()
+  wordApi.searchWord(wordUi.searchSuccess, wordUi.failure, word);
+})
