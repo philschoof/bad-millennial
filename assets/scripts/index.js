@@ -43,7 +43,7 @@ $('#search-word').on('submit', function(event, word){
   word = $('#wordInput').val();
   $('.search-word-display').html(word);
   console.log(word);
-  wordApi.searchWord(wordUi.searchSuccess, wordUi.failure, word);
+  authApi.searchWord(authUi.searchSuccess, authUi.failure, word);
 })
 
 

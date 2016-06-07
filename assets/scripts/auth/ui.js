@@ -3,25 +3,28 @@
 
 const app = require('../app-data');
 const api = require('./api');
-const wordApi = require('../word/api');
-const wordUi = require('../word/ui');
+// const wordApi = require('../word/api');
+// const wordUi = require('../word/ui');
 
-//currentUser object set on successful sign-in
-let currentUser = {
-  token:'',
-  id: undefined
-};
+
+//Word UI
 
 const deleteWord = (success, failure, id) => {
   $.ajax({
     method: "DELETE",
-    url: app.api + 'words/' + id,
+    url: app.api.api + 'words/' + id,
     headers: {
-      Authorization: 'Token token=' + currentUser.token
+      Authorization: 'Token token=' + app.currentUser.token
     },
   }).done(success)
   .fail(failure)
 }
+
+
+const deleteWordSuccess = () => {
+  getWords();
+}
+
 
 const displayDictionary = (words) => {
   let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
@@ -34,17 +37,17 @@ const displayDictionary = (words) => {
   $('.delete-word').on('click', function(event){
     event.preventDefault()
     let wordId = $(this).data('id');
-    deleteWord(wordUi.deleteWordSucces, wordUi.failure, wordId);
+    deleteWord(deleteWordSuccess, failure, wordId);
   })
 }
 
 const getWords = () => {
   $.ajax({
     method: "GET",
-    url:app.api + 'users/' + currentUser.id + '/words',
+    url:app.api.api + 'users/' + app.currentUser.id + '/words',
     dataType: 'json',
     headers: {
-      Authorization: "Token token=" + currentUser.token
+      Authorization: "Token token=" + app.currentUser.token
     }
   }).done(function(words){
     console.log('get words success');
@@ -54,16 +57,87 @@ const getWords = () => {
   });
 };
 
+const addWord = (success, failure, definition, word) => {
+  $.ajax({
+    method: "POST",
+    url: app.api.api + "users/" + app.currentUser.id +'/words/',
+    dataType: 'json',
+    headers: {
+      Authorization: "Token token=" + app.currentUser.token
+    },
+    data: {
+      "word": {
+        "entry": word,
+        "definition": definition
+      },
+    }
+  }).done(success)
+    .fail(failure);
+};
 
+const addWordSuccess = (data) => {
+  console.log(data);
+  console.log('add word success')
+  $('.search-result-display').html('Added to you dyslexicon')
+  getWords();
+}
+
+const addWordFailure = (data) => {
+  $('.search-result-display').html('Cannot add new word')
+}
+
+
+const displaySearch = (defArr) => {
+  let searchDisplayTemplate = require('../templates/search-results.handlebars');
+    $('.search-result-display').html(searchDisplayTemplate({
+      defArr: defArr
+    }));
+    //click handler to add word and definition
+    $('.word-div').on('click', function(event){
+      console.log('word clicked')
+      let definition = $(this).text();
+      definition = definition.trim();
+      console.log(definition)
+      let word = $('.search-word-display').text();
+      event.preventDefault();
+      addWord(addWordSuccess, addWordFailure, definition, word)
+    })
+
+      };
+
+
+
+
+
+const searchSuccess = (data) => {
+  let returnList = data.list;
+  console.log(returnList)
+  let defArr = [];
+  //build case for less than three words
+  for (let i = 0; i < 3; i++){
+    defArr.push(returnList[i].definition)
+  }
+  console.log(defArr);
+  displaySearch(defArr)
+};
+
+
+
+
+
+
+
+
+//User UI
 
 const signUpSuccess = () => {
   console.log('signed-up');
 };
 
 const signInSuccess = (data) => {
-  currentUser.token = data.user.token;
-  currentUser.id = data.user.id;
-  console.log(currentUser);
+  app.currentUser.token = data.user.token;
+  app.currentUser.id = data.user.id;
+  console.log(app.currentUser);
   getWords();
 
 };
@@ -73,8 +147,8 @@ const changePasswordSuccess = () => {
 };
 
 const signOutSuccess = () => {
-  currentUser.token = '';
-  currentUser.id = undefined;
+  app.currentUser.token = '';
+  app.currentUser.id = undefined;
   console.log('signed out');
 };
 
@@ -89,6 +163,13 @@ module.exports = {
   changePasswordSuccess,
   signOutSuccess,
   getWords,
-  currentUser,
+  deleteWord,
+  displayDictionary,
+  getWords,
+  displaySearch,
+  searchSuccess,
+  addWordSuccess,
+  addWordFailure,
+  deleteWordSuccess,
   failure
 };

@@ -10,7 +10,7 @@ const signUp = (success, failure, data) => {
   console.log("API", data);
   $.ajax({
     method: "POST",
-    url: app.api + 'sign-up',
+    url: app.api.api + 'sign-up',
     data,
   })
   .done(success, data)
@@ -21,7 +21,7 @@ const signIn = (success, failure, data) => {
   console.log("API", data);
   $.ajax({
     method: "POST",
-    url: app.api + 'sign-in',
+    url: app.api.api + 'sign-in',
     data,
   })
   .done(success, data)
@@ -31,7 +31,7 @@ const signIn = (success, failure, data) => {
 const changePassword = (success, failure, data) => {
   $.ajax({
     method: "PATCH",
-    url: app.api + 'change-password/' + ui.currentUser.id,
+    url: app.api.api + 'change-password/' + app.currentUser.id,
     data: {
       'passwords': {
         'old': data.pw_creds.old,
@@ -40,7 +40,7 @@ const changePassword = (success, failure, data) => {
     },
     headers: {
       contentType: "application.json",
-      Authorization: "Token token=" + ui.currentUser.token
+      Authorization: "Token token=" + app.currentUser.token
     },
   }).done(success)
   .fail(failure);
@@ -49,13 +49,33 @@ const changePassword = (success, failure, data) => {
 const signOut = (success, failure) => {
   $.ajax({
     method: "DELETE",
-    url: app.api + 'sign-out/' + ui.currentUser.id,
+    url: app.api.api + 'sign-out/' + app.currentUser.id,
     headers: {
-      Authorization: 'Token token=' + ui.currentUser.token
+      Authorization: 'Token token=' + app.currentUser.token
     },
   }).done(success)
   .fail(failure);
 };
+
+
+//word crud
+
+const searchWord = (success, failure, word) => {
+  console.log('search word ' + word)
+  $.ajax({
+    method: "GET",
+    url: app.api.urbanDictionary + word,
+
+  headers: {
+    'X-Mashape-Key': 'DYCnJzm8P0mshSkYdIPXX1kBHZiyp1yEsykjsnkkOg1bcnZnc8'
+  },
+}).done(success)
+  .fail(failure);
+};
+
+
+
+//deleteWord is in authApi
 
 
 
@@ -65,5 +85,6 @@ module.exports = {
   signUp,
   signIn,
   changePassword,
-  signOut
+  signOut,
+  searchWord
 };
