@@ -66,6 +66,7 @@ module.exports = {
   signInSuccess,
   changePasswordSuccess,
   signOutSuccess,
+  getWords,
   currentUser,
   failure
 };

@@ -25,16 +25,17 @@ const addWord = (success, failure, definition, word) => {
 };
 
 
-const displaySearch = (defObj) => {
+const displaySearch = (defArr) => {
   let searchDisplayTemplate = require('../templates/search-results.handlebars');
-    $('.content').html(searchDisplayTemplate({
-      defObj: defObj
+    $('.search-result-display').html(searchDisplayTemplate({
+      defArr: defArr
     }));
     //click handler to add word and definition
     $('.word-div').on('click', function(event){
       console.log('word clicked')
       let definition = $(this).text();
-      definition.trim();
+      definition = definition.trim();
+      console.log(definition)
       let word = $('.search-word-display').text();
       event.preventDefault();
       addWord(addWordSuccess, failure, definition, word)
@@ -48,17 +49,21 @@ const displaySearch = (defObj) => {
 const searchSuccess = (data) => {
   let returnList = data.list;
   console.log(returnList)
-  let defObj = {};
+  let defArr = [];
+  //build case for less than three words
   for (let i = 0; i < 3; i++){
-    defObj[i] = returnList[i].definition
+    defArr.push(returnList[i].definition)
   }
-  console.log(defObj);
-  displaySearch(defObj)
+  console.log(defArr);
+  displaySearch(defArr)
 };
 
 const addWordSuccess = (data) => {
   console.log(data);
   console.log('add word success')
+  $('.search-result-display').html('Added to you dyslexicon')
+  authUi.getWords();
+
 }
 
 const failure = () => {

@@ -1,15 +1,20 @@
-{{#each words}}
-  <div class="row">
-    <div class="panel panel-inverse " >
-      <div class="panel-body word-div">
 
-        <div class="col-md-6">
-          <p class="search-word-definition word-div" data-attribute={{@key}}>{{this.entry}} - {{this.defintion}}</p>
-        </div>
-        <div class="col-md-6">
 
-        </div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {{#each words}}
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          {{this.entry}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        {{this.definition}}
       </div>
     </div>
   </div>
+</div>
 {{/each}}

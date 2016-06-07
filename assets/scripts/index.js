@@ -46,15 +46,7 @@ $('#search-word').on('submit', function(event, word){
   wordApi.searchWord(wordUi.searchSuccess, wordUi.failure, word);
 })
 
-//click handler to add word and definition
-$('.word-div').on('click', function(event){
-  console.log('word clicked')
-  let definition = $(this).text();
-  definition.trim();
-  let word = $('.search-word-display').text();
-  event.preventDefault();
-  wordUi.addWord(addWordSuccess, failure, definition, word)
-});
+
 
 module.exports = {
   word
