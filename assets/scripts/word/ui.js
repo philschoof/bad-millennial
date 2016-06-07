@@ -38,9 +38,10 @@ const displaySearch = (defArr) => {
       console.log(definition)
       let word = $('.search-word-display').text();
       event.preventDefault();
-      addWord(addWordSuccess, failure, definition, word)
-    });
-  };
+      addWord(addWordSuccess, addWordFailure, definition, word)
+    })
+
+      };
 
 
 
@@ -63,7 +64,14 @@ const addWordSuccess = (data) => {
   console.log('add word success')
   $('.search-result-display').html('Added to you dyslexicon')
   authUi.getWords();
+}
 
+const addWordFailure = (data) => {
+  $('.search-result-display').html('Cannot add new word')
+}
+
+const deleteWordSuccess = () => {
+  authUi.getWords();
 }
 
 const failure = () => {
@@ -74,6 +82,6 @@ module.exports = {
   searchSuccess,
   addWordSuccess,
   displaySearch,
-
+  deleteWordSuccess,
   failure
 }

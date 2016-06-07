@@ -20,6 +20,9 @@ const searchWord = (success, failure, word) => {
   .fail(failure);
 };
 
+//addWord is in ui
+
+//deleteWord is in authApi
 
 
 module.exports = {

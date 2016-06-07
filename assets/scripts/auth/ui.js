@@ -2,6 +2,9 @@
 
 
 const app = require('../app-data');
+const api = require('./api');
+const wordApi = require('../word/api');
+const wordUi = require('../word/ui');
 
 //currentUser object set on successful sign-in
 let currentUser = {
@@ -9,11 +12,30 @@ let currentUser = {
   id: undefined
 };
 
+const deleteWord = (success, failure, id) => {
+  $.ajax({
+    method: "DELETE",
+    url: app.api + 'words/' + id,
+    headers: {
+      Authorization: 'Token token=' + currentUser.token
+    },
+  }).done(success)
+  .fail(failure)
+}
+
 const displayDictionary = (words) => {
   let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
   $('.dictionary-display').html(dictionaryDisplayTemplate({
     words:words.words
-  }));
+  }))
+  // $('.edit-word').on('click', function(event){
+  //   event.preventDefault();
+  // })
+  $('.delete-word').on('click', function(event){
+    event.preventDefault()
+    let wordId = $(this).data('id');
+    deleteWord(wordUi.deleteWordSucces, wordUi.failure, wordId);
+  })
 }
 
 const getWords = () => {
