@@ -36,6 +36,10 @@ $('#sign-out').on('click', function(event){
   authApi.signOut(authUi.signOutSuccess, authUi.failure);
 });
 
+
+
+//Word handlers
+
 let word = '';
 
 $('#search-word').on('submit', function(event, word){
@@ -45,7 +49,6 @@ $('#search-word').on('submit', function(event, word){
   console.log(word);
   authApi.searchWord(authUi.searchSuccess, authUi.failure, word);
 })
-
 
 
 

@@ -25,15 +25,45 @@ const deleteWordSuccess = () => {
   getWords();
 }
 
+const editWord = (success, failure, definition, wordId) => {
+  $.ajax({
+    method: 'PATCH',
+    url: app.api.api + 'words/' + wordId,
+    data: {
+      "word": {
+        "definition": definition.definition
+      }
+    },
+    headers:{
+      Authorization: "Token token=" + app.currentUser.token,
+    }
+  }).done(success)
+  .fail(failure);
+};
+
+
+
 
 const displayDictionary = (words) => {
   let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
   $('.dictionary-display').html(dictionaryDisplayTemplate({
     words:words.words
   }))
-  // $('.edit-word').on('click', function(event){
-  //   event.preventDefault();
-  // })
+  $('.edit-word').on('click', function(event){
+    event.preventDefault();
+    console.log('edit click')
+    $('#editDefinitionModal').modal('show');
+    console.log($(this).data('id'));
+    let wordId = $(this).data('id');
+    $('#edit-definition-form').on('submit', function(event){
+      event.preventDefault();
+      let definition = getFormFields(this)
+      console.log(definition);
+      $('#editDefinitionModal').modal('hide');
+      editWord(editWordSuccess, failure, definition, wordId);
+    })
+
+  })
   $('.delete-word').on('click', function(event){
     event.preventDefault()
     let wordId = $(this).data('id');
@@ -78,7 +108,7 @@ const addWord = (success, failure, definition, word) => {
 const addWordSuccess = (data) => {
   console.log(data);
   console.log('add word success')
-  $('.search-result-display').html('Added to you dyslexicon')
+  $('.search-result-display').html('Added to your dyslexicon')
   getWords();
 }
 
@@ -121,6 +151,10 @@ const searchSuccess = (data) => {
   displaySearch(defArr)
 };
 
+const editWordSuccess = (data) => {
+  getWords();
+}
+
 
 
 
@@ -152,6 +186,11 @@ const signOutSuccess = () => {
   console.log('signed out');
 };
 
+const success = () => {
+  console.log('success');
+
+}
+
 
 const failure = () => {
   console.log('failure');
@@ -165,7 +204,6 @@ module.exports = {
   getWords,
   deleteWord,
   displayDictionary,
-  getWords,
   displaySearch,
   searchSuccess,
   addWordSuccess,
