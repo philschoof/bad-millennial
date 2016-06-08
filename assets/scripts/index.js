@@ -31,10 +31,30 @@ $('#change-password').on('submit', function(event){
   authApi.changePassword(authUi.changePasswordSuccess, authUi.failure, data);
 });
 
-$('#sign-out').on('click', function(event){
+
+
+// usermodals
+
+$('.sign-up-modal-open').on('click', function(event){
+  event.preventDefault();
+  $('#signUpModal').modal('show');
+})
+
+$('.sign-in-modal-open').on('click', function(event){
+  event.preventDefault();
+  $('#signInModal').modal('show');
+})
+
+$('.change-password-modal-open').on('click', function(event){
+  event.preventDefault();
+  $('#changePasswordModal').modal('show');
+})
+
+//Sign out
+$('.sign-out').on('click', function(event){
   event.preventDefault();
   authApi.signOut(authUi.signOutSuccess, authUi.failure);
-});
+})
 
 
 

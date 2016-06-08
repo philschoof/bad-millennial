@@ -6,6 +6,14 @@ const api = require('./api');
 // const wordApi = require('../word/api');
 // const wordUi = require('../word/ui');
 
+const hideShow = function(arr1, arr2) {
+  arr1.forEach(function(element){
+    $(element).addClass('hidden')
+  })
+  arr2.forEach(function(element){
+    $(element).removeClass('hidden')
+  })
+};
 
 //Word UI
 
@@ -113,7 +121,7 @@ const addWordSuccess = (data) => {
 }
 
 const addWordFailure = (data) => {
-  $('.search-result-display').html('Cannot add new word')
+  $('.word-error').removeClass('hidden');
 }
 
 
@@ -172,6 +180,8 @@ const signInSuccess = (data) => {
   app.currentUser.token = data.user.token;
   app.currentUser.id = data.user.id;
   console.log(app.currentUser);
+
+  hideShow(['.sign-up-modal-open','.sign-in-modal-open', '.navbar-brand'], ['.dropdown-toggle', '.search-word-div', '.dictionary-row']);
   getWords();
 
 };
@@ -183,6 +193,7 @@ const changePasswordSuccess = () => {
 const signOutSuccess = () => {
   app.currentUser.token = '';
   app.currentUser.id = undefined;
+  hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row'], ['.sign-up-modal-open','.sign-in-modal-open', '.navbar-brand']);
   console.log('signed out');
 };
 
