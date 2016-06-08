@@ -1,6 +1,8 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
+
+
 .row {
   margin:0;
   padding:0;
@@ -12,9 +14,32 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   overflow: hidden;
 }
 
-.dictioanry-display {
+.search-word-div {
+  width: 100%;
+  margin: 25px auto;
+  background: white;
+  padding:15px;
+  border-radius: 5px;
+}
+
+.search-word-div input {
   width:50%;
 }
+
+.dictioanry-display {
+
+}
+
+.panel-group{
+  background-color: #DDD;
+  margin:0;
+}
+
+.search-result-display {
+  height:350px;
+  overflow: scroll;
+}
+
 
 .entry{
   font-weight: bold;
@@ -26,11 +51,50 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .dictionary-row {
   height: 350px;
+}
 
+.dictionary-row h3 {
+  color:white;
 }
 
 .dictionary-display{
   border: 1px solid black;
   max-height: 350px;
   overflow: scroll;
+  border-radius: 5px;
+}
+
+.landing-background{
+   background: url('http://image-cdn.dropr.com/image/dropr_RbIVN6OLXv4aKwaOlz4B0RW5vOQFHtLn_r1_920x1840.jpg') no-repeat center center fixed;
+   background-size: cover;
+}
+
+ .home-background {
+  background: url('https://images.unsplash.com/photo-1456081101716-74e616ab23d8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=71ba3e28bfc02cbcb71579569dcb91ee') no-repeat;
+  background-size: cover;
+
+ }
+
+ .home-content-background{
+   color:blue;
+ }
+
+
+
+.landing-div {
+  width: 60%;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, .5);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.landing-buttons button{
+  margin-top: 150px;
+  margin-left: 50px;
+  width: 100px;
+}
+
+.landing-div p {
+  margin: 5px;
 }

@@ -140,6 +140,7 @@ const displaySearch = (defArr) => {
       definition = definition.trim();
       console.log(definition)
       let word = $('.search-word-display').text();
+      word = word.charAt(0).toUpperCase() + word.slice(1);
       event.preventDefault();
       addWord(addWordSuccess, addWordFailure, definition, word)
     })
@@ -195,8 +196,9 @@ const signInSuccess = (data) => {
   app.currentUser.token = data.user.token;
   app.currentUser.id = data.user.id;
   console.log(app.currentUser);
-
-  hideShow(['.sign-up-modal-open','.sign-in-modal-open', '.navbar-brand'], ['.dropdown-toggle', '.search-word-div', '.dictionary-row']);
+  $('body').removeClass('landing-background');
+  $('body').addClass('home-background');
+  hideShow(['.landing-div', '.navbar-brand', '.landing-buttons'], ['.dropdown-toggle', '.search-word-div', '.dictionary-row']);
   getWords();
 
 };
@@ -208,7 +210,9 @@ const changePasswordSuccess = () => {
 const signOutSuccess = () => {
   app.currentUser.token = '';
   app.currentUser.id = undefined;
-  hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row'], ['.sign-up-modal-open','.sign-in-modal-open', '.navbar-brand']);
+  $('body').addClass('landing-background')
+  $('body').removeClass('home-background')
+  hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row', '.landing-buttons'], ['.landing-div', '.navbar-brand']);
   console.log('signed out');
 };
 
