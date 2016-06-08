@@ -1,23 +1,21 @@
 
-  {{#each words}}
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {{#each words}}
   <div class="panel panel-default" }>
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href=".{{this.entry}}" aria-expanded="false" aria-controls=".{{this.entry}}">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href=".{{this.id}}" aria-expanded="false" aria-controls=".{{this.entry}}">
           {{this.entry}}
         </a>
       </h4>
     </div>
-    <div  class="panel-collapse collapse {{this.entry}}" role="tabpanel" aria-labelledby="headingOne">
+    <div  class="panel-collapse collapse {{this.id}}" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body " aria-expanded="false" >
         <p class="word-definition">{{this.definition}}</p>
         <button class="btn btn-info edit-word" data-id={{this.id}}>Edit</button><button class="btn btn-danger delete-word" data-id={{this.id}}>Delete</button>
       </div>
     </div>
   </div>
+  {{/each}}
 </div>
-
-
-{{/each}}

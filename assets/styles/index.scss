@@ -9,6 +9,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .search-word-display {
   width:50%;
+  overflow: hidden;
 }
 
 .dictioanry-display {
@@ -25,9 +26,11 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .dictionary-row {
   height: 350px;
-  overflow: scroll;
+
 }
 
 .dictionary-display{
   border: 1px solid black;
+  max-height: 350px;
+  overflow: scroll;
 }

@@ -10,9 +10,11 @@ const hideShow = function(arr1, arr2) {
   arr1.forEach(function(element){
     $(element).addClass('hidden')
   })
-  arr2.forEach(function(element){
-    $(element).removeClass('hidden')
-  })
+  if (arr2){
+    arr2.forEach(function(element){
+      $(element).removeClass('hidden')
+    })
+  }
 };
 
 //Word UI
@@ -53,6 +55,7 @@ const editWord = (success, failure, definition, wordId) => {
 
 
 const displayDictionary = (words) => {
+  console.log(words)
   let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
   $('.dictionary-display').html(dictionaryDisplayTemplate({
     words:words.words
@@ -150,10 +153,22 @@ const displaySearch = (defArr) => {
 const searchSuccess = (data) => {
   let returnList = data.list;
   console.log(returnList)
+  console.log(returnList.length)
+  hideShow(['.word-error', '.word-search-error'])
   let defArr = [];
-  //build case for less than three words
-  for (let i = 0; i < 3; i++){
-    defArr.push(returnList[i].definition)
+  if(returnList.length === 0){
+    $('.word-search-error').removeClass('hidden');
+    console.log('list length 0')
+  }else if (returnList.length <= 3){
+    console.log('list length less than 3')
+    for (let i = 0; i < returnList.length; i++){
+      defArr.push(returnList[i].definition)
+    }
+  }else {
+    console.log('list length greater than 3')
+    for (let i = 0; i < 3; i++){
+      defArr.push(returnList[i].definition)
+    }
   }
   console.log(defArr);
   displaySearch(defArr)
