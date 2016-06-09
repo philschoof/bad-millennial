@@ -17,7 +17,29 @@ const hideShow = function(arr1, arr2) {
   }
 };
 
+
+//Random word function
+
+let randWord = [
+  "Phubbing",
+  "Hundo P",
+  "JOMO",
+  "I can't even",
+  "The struggle is real",
+  "Dipset",
+  "Bae",
+  "V",
+  "P"
+];
+
+const randomWordFunk = function(randWord){
+  let randomIndex = Math.floor(Math.random() * (randWord.length - 1))
+  $('.random-word').text(randWord[randomIndex]);
+}
+
 //Word UI
+
+
 
 const deleteWord = (success, failure, id) => {
   $.ajax({
@@ -199,6 +221,7 @@ const signInSuccess = (data) => {
   $('body').removeClass('landing-background');
   $('body').addClass('home-background');
   hideShow(['.landing-div', '.navbar-brand', '.landing-buttons'], ['.dropdown-toggle', '.search-word-div', '.dictionary-row']);
+  randomWordFunk(randWord);
   getWords();
 
 };
@@ -212,7 +235,7 @@ const signOutSuccess = () => {
   app.currentUser.id = undefined;
   $('body').addClass('landing-background')
   $('body').removeClass('home-background')
-  hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row', '.landing-buttons'], ['.landing-div', '.navbar-brand']);
+  hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row'], ['.landing-div', '.navbar-brand' , '.landing-buttons']);
   console.log('signed out');
 };
 

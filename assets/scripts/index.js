@@ -71,25 +71,10 @@ $('#search-word').on('submit', function(event, word){
 })
 
 
-//Random word function
 
-let randWord = [
-  "Phubbing",
-  "Hundo P",
-  "JOMO",
-  "Sorry not sorry",
-  "I can't even",
-  "The struggle is real",
-  "Dipset",
-  "Bae",
-  "V",
-  "P"
-];
 
-// const randomWordFunk = function(randWord){
-//   let randomIndex = Math.floor(Math.random * randWord.length)
-//   $(;).val(randWord[randomIndex]);
-// }
+
+
 
 
 

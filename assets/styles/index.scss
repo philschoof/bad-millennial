@@ -27,7 +27,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 }
 
 .dictioanry-display {
-
+  overflow: scroll;
 }
 
 .panel-group{
@@ -97,4 +97,8 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .landing-div p {
   margin: 5px;
+}
+
+.random-word {
+  font-style: italic;
 }
