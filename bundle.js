@@ -108,7 +108,7 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var app = __webpack_require__(4);
+	var app = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../app-data\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var ui = __webpack_require__(5);
 
 	//User CRUD
@@ -183,35 +183,13 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var api = {
-	  api: 'http://localhost:3000/',
-	  // api:'https://bad-millennial.herokuapp.com/'
-	  urbanDictionary: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' //+term
-	};
-
-	//currentUser object set on successful sign-in
-	var currentUser = {
-	  token: '',
-	  id: undefined
-	};
-
-	module.exports = {
-	  api: api,
-	  currentUser: currentUser
-	};
-
-/***/ },
+/* 4 */,
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
-	var app = __webpack_require__(4);
+	var app = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../app-data\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var api = __webpack_require__(3);
 	// const wordApi = require('../word/api');
 	// const wordUi = require('../word/ui');
