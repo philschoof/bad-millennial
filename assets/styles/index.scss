@@ -1,7 +1,10 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
 
 .row {
   margin:0;
@@ -53,7 +56,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   height: 350px;
 }
 
-.dictionary-row h3 {
+.dictionary-row h2 {
   color:white;
 }
 
@@ -87,6 +90,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   background-color: rgba(255, 255, 255, .5);
   padding: 5px;
   border-radius: 5px;
+  margin-top: 100px;
 }
 
 .landing-buttons button{

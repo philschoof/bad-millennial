@@ -8,12 +8,12 @@ const api = require('./api');
 
 const hideShow = function(arr1, arr2) {
   arr1.forEach(function(element){
-    $(element).addClass('hidden')
-  })
+    $(element).addClass('hidden');
+  });
   if (arr2){
     arr2.forEach(function(element){
-      $(element).removeClass('hidden')
-    })
+      $(element).removeClass('hidden');
+    });
   }
 };
 
@@ -33,9 +33,9 @@ let randWord = [
 ];
 
 const randomWordFunk = function(randWord){
-  let randomIndex = Math.floor(Math.random() * (randWord.length - 1))
+  let randomIndex = Math.floor(Math.random() * (randWord.length - 1));
   $('.random-word').text(randWord[randomIndex]);
-}
+};
 
 //Word UI
 
@@ -49,13 +49,13 @@ const deleteWord = (success, failure, id) => {
       Authorization: 'Token token=' + app.currentUser.token
     },
   }).done(success)
-  .fail(failure)
-}
+  .fail(failure);
+};
 
 
 const deleteWordSuccess = () => {
   getWords();
-}
+};
 
 const editWord = (success, failure, definition, wordId) => {
   $.ajax({
@@ -77,32 +77,32 @@ const editWord = (success, failure, definition, wordId) => {
 
 
 const displayDictionary = (words) => {
-  console.log(words)
+  console.log(words);
   let dictionaryDisplayTemplate = require('../templates/dictionary.handlebars');
   $('.dictionary-display').html(dictionaryDisplayTemplate({
     words:words.words
-  }))
+  }));
   $('.edit-word').on('click', function(event){
     event.preventDefault();
-    console.log('edit click')
+    console.log('edit click');
     $('#editDefinitionModal').modal('show');
     console.log($(this).data('id'));
     let wordId = $(this).data('id');
     $('#edit-definition-form').on('submit', function(event){
       event.preventDefault();
-      let definition = getFormFields(this)
+      let definition = getFormFields(this);
       console.log(definition);
       $('#editDefinitionModal').modal('hide');
       editWord(editWordSuccess, failure, definition, wordId);
-    })
+    });
 
-  })
+  });
   $('.delete-word').on('click', function(event){
-    event.preventDefault()
+    event.preventDefault();
     let wordId = $(this).data('id');
     deleteWord(deleteWordSuccess, failure, wordId);
-  })
-}
+  });
+};
 
 const getWords = () => {
   $.ajax({
@@ -139,15 +139,16 @@ const addWord = (success, failure, definition, word) => {
 };
 
 const addWordSuccess = (data) => {
+  randomWordFunk(randWord);
   console.log(data);
-  console.log('add word success')
-  $('.search-result-display').html('Added to your dyslexicon')
+  console.log('add word success');
+  $('.search-result-display').html('Added to your dyslexicon');
   getWords();
-}
+};
 
 const addWordFailure = (data) => {
   $('.word-error').removeClass('hidden');
-}
+};
 
 
 const displaySearch = (defArr) => {
@@ -157,7 +158,7 @@ const displaySearch = (defArr) => {
     }));
     //click handler to add word and definition
     $('.word-div').on('click', function(event){
-      console.log('word clicked')
+      console.log('word clicked');
       let definition = $(this).text();
       definition = definition.trim();
       console.log(definition)
@@ -175,13 +176,11 @@ const displaySearch = (defArr) => {
 
 const searchSuccess = (data) => {
   let returnList = data.list;
-  console.log(returnList)
-  console.log(returnList.length)
-  hideShow(['.word-error', '.word-search-error'])
+  hideShow(['.word-error', '.word-search-error']);
   let defArr = [];
   if(returnList.length === 0){
     $('.word-search-error').removeClass('hidden');
-    console.log('list length 0')
+    console.log('list length 0');
   }else if (returnList.length <= 3){
     console.log('list length less than 3')
     for (let i = 0; i < returnList.length; i++){
@@ -213,12 +212,15 @@ const editWordSuccess = (data) => {
 const signUpSuccess = () => {
   console.log('signed-up');
   $('.sign-up-error').addClass('hidden');
+  $('#signUpModal').modal('hide');
 };
 
 const signInSuccess = (data) => {
-  $('.search-result-display').html('')
+  $('.search-result-display').html('');
   $('.search-word-display').html('');
   $('.sign-in-error').addClass('hidden');
+  $('.navbar-inverse').removeClass('hidden');
+  $('#signInModal').modal('hide');
   app.currentUser.token = data.user.token;
   app.currentUser.id = data.user.id;
   console.log(app.currentUser);
@@ -232,6 +234,7 @@ const signInSuccess = (data) => {
 
 const changePasswordSuccess = () => {
   $('.sign-in-error').addClass('hidden');
+  $('#changePasswordModal').modal('hide');
   console.log('changed password');
 };
 
@@ -240,6 +243,7 @@ const signOutSuccess = () => {
   app.currentUser.id = undefined;
   $('body').addClass('landing-background')
   $('body').removeClass('home-background')
+  $('.navbar-inverse').addClass('hidden');
   hideShow(['.dropdown-toggle', '.search-word-div', '.dictionary-row'], ['.landing-div', '.navbar-brand' , '.landing-buttons']);
   console.log('signed out');
 };
