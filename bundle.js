@@ -189,8 +189,8 @@ webpackJsonp([0],[
 	'use strict';
 
 	var api = {
-	  api: 'http://localhost:3000/',
-	  // api:'https://bad-millennial.herokuapp.com/',
+	  // api:'http://localhost:3000/',
+	  api: 'https://bad-millennial.herokuapp.com/',
 	  urbanDictionary: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' //+term
 	};
 
