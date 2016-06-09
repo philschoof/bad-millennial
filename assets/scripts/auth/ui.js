@@ -210,7 +210,6 @@ const editWordSuccess = (data) => {
 //User UI
 
 const signUpSuccess = () => {
-  console.log('signed-up');
   $('.sign-up-error').addClass('hidden');
   $('#signUpModal').modal('hide');
 };
