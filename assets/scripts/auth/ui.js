@@ -212,9 +212,13 @@ const editWordSuccess = (data) => {
 
 const signUpSuccess = () => {
   console.log('signed-up');
+  $('.sign-up-error').addClass('hidden');
 };
 
 const signInSuccess = (data) => {
+  $('.search-result-display').html('')
+  $('.search-word-display').html('');
+  $('.sign-in-error').addClass('hidden');
   app.currentUser.token = data.user.token;
   app.currentUser.id = data.user.id;
   console.log(app.currentUser);
@@ -227,6 +231,7 @@ const signInSuccess = (data) => {
 };
 
 const changePasswordSuccess = () => {
+  $('.sign-in-error').addClass('hidden');
   console.log('changed password');
 };
 
@@ -244,6 +249,17 @@ const success = () => {
 
 }
 
+const signUpFailure = () => {
+  $('.sign-up-error').removeClass('hidden');
+}
+
+const signInFailure = () => {
+  $('.sign-in-error').removeClass('hidden');
+}
+
+const changePasswordFailure = () => {
+  $('.change-password-error').removeClass('hidden');
+}
 
 const failure = () => {
   console.log('failure');
@@ -262,5 +278,8 @@ module.exports = {
   addWordSuccess,
   addWordFailure,
   deleteWordSuccess,
+  signUpFailure,
+  signInFailure,
+  changePasswordFailure,
   failure
 };

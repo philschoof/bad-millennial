@@ -14,21 +14,21 @@ $('#sign-up').on('submit', function (event){
   let data = getFormFields(this);
   console.log(data, 'sign-up submitted');
   event.preventDefault();
-  authApi.signUp(authUi.signUpSuccess, authUi.failure, data);
+  authApi.signUp(authUi.signUpSuccess, authUi.signUpFailure, data);
 });
 
 $('#sign-in').on('submit', function (event){
   let data = getFormFields(this);
   console.log(data, 'sign-in submitted');
   event.preventDefault();
-  authApi.signIn(authUi.signInSuccess, authUi.failure, data);
+  authApi.signIn(authUi.signInSuccess, authUi.signInFailure, data);
 });
 
 $('#change-password').on('submit', function(event){
   let data = getFormFields(this);
   console.log('change password submitted');
   event.preventDefault();
-  authApi.changePassword(authUi.changePasswordSuccess, authUi.failure, data);
+  authApi.changePassword(authUi.changePasswordSuccess, authUi.changePasswordFailure, data);
 });
 
 
